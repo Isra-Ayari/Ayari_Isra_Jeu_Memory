@@ -1,9 +1,9 @@
-
-/* Layout for multiple cards */
-.card-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 100px;
+.container {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  grid-template-rows: repeat(2, 1fr);
+  column-gap: 50px;
+  row-gap: 150px;
 }
 
 /* Reusable card styles */
@@ -11,6 +11,7 @@
   width: 250px;
   height: 150px;
   perspective: 1000px;
+  transform-style: preserve-3d;
 }
 
 .card-inner {
@@ -39,11 +40,6 @@
   font-size: 1.2em;
 }
 
-/* Front colors can differ using nth-child
-.card:nth-child(1) .card-front { background: #3498db; }
-.card:nth-child(2) .card-front { background: #9b59b6; }
-.card:nth-child(3) .card-front { background: #e67e22; } */
-
 .back {
   transform: rotateY(180deg);
   z-index: 1;
@@ -51,3 +47,4 @@
 .front {
   z-index: 2;
 }
+
