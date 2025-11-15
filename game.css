@@ -1,0 +1,53 @@
+
+/* Layout for multiple cards */
+.card-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 100px;
+}
+
+/* Reusable card styles */
+.card {
+  width: 250px;
+  height: 150px;
+  perspective: 1000px;
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.card.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+.front, .back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: sans-serif;
+  color: white;
+  font-size: 1.2em;
+}
+
+/* Front colors can differ using nth-child
+.card:nth-child(1) .card-front { background: #3498db; }
+.card:nth-child(2) .card-front { background: #9b59b6; }
+.card:nth-child(3) .card-front { background: #e67e22; } */
+
+.back {
+  transform: rotateY(180deg);
+  z-index: 1;
+}
+.front {
+  z-index: 2;
+}
