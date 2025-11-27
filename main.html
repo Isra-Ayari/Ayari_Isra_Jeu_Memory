@@ -7,12 +7,19 @@
 		<link rel="stylesheet" type="text/css" href="game.css">
 	</head>
     <body>
-        <div id="landing_page">
-            <h1>Match The Cat</h1>
-            <button onclick="play()">Start</button>
+        <div class="wrapper">
+            <div id="landing_page">
+                <h1>Match The Cat</h1>
+                ️<p>Find all the matching cat pairs in the shortest time possible!</p>
+                <button onclick="play()">Start</button>
+            </div>
         </div>
-        <div id="game">
-            <p>Score: <span class="score"></span></p>
+        <div id="game" style="display: none;">
+            <p class="sc">Score: <span class="score"></span>  |   
+                            Timer: <span class="timer"></span>s<br>
+                            High Score: <span class="high-score"></span>
+            </p>
+
             <div class="container">
                 <!-- card -->
                 <div class="card" id="card1">
@@ -83,13 +90,11 @@
             </div>
             
         </div>
-        <div id="result">
+        <div id="result" style="display: none;">
             <div class="popup-w">
-                <p>Congrats! You won!</p>
-                <button onclick="Restart()">Retry</button>
-            </div>
-            <div class="popup-f">
-                <p>Oh no! Time's up!</p>
+                <p>Congrats! You won!<br>
+                   Your score: <span class="score_f"></span><br>
+                   High Score: <span class="high-score_f"></span></p>
                 <button onclick="Restart()">Retry</button>
             </div>
         </div>

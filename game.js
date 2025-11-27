@@ -3,8 +3,12 @@ let firstCard=null, secondCard=null;
 let lockBoard=false;
 let score=0;
 let cards=[];
+let timer=0;
 
-document.querySelector(".score").textContent = score;
+
+document.querySelector(".score").textContent = '--';
+document.querySelector(".timer").textContent = '--';
+document.querySelector(".high-score").textContent = getHighScore();
 
 document.addEventListener('DOMContentLoaded', () => {
     (async () => {
@@ -13,6 +17,25 @@ document.addEventListener('DOMContentLoaded', () => {
         shuffleCards();
     })();
 });
+
+function setHighScore(score) {
+  let currentHigh = getHighScore();
+
+  // If first time, create the key
+  if (currentHigh === null) {
+    localStorage.setItem("highScore", score);
+    return;
+  }
+
+  // Otherwise compare and update
+  if (score < currentHigh) {
+    localStorage.setItem("highScore", score);
+  }
+}
+
+function getHighScore() {
+  return Number(localStorage.getItem("highScore")) || '--';
+}
 
 function flipCard() {
   if (lockBoard) return;
@@ -67,6 +90,7 @@ function initBoard() {
     cardElem.removeEventListener('click', flipCard);
     cardElem.addEventListener('click', flipCard);
   });
+
   // re-enable transitions after a tick so future flips animate normally
   setTimeout(() => {
     cardElems.forEach(cardElem => {
@@ -88,6 +112,8 @@ function shuffleCards() {
 }
 
 async function play() {
+  switchDivs();
+  fTimer();
   if (!cards || cards.length === 0) {
     await new Promise(resolve => {
       const check = setInterval(() => {
@@ -114,6 +140,7 @@ function disableCards() {
     secondCard.classList.add('matched');
     firstCard.removeEventListener("click", flipCard);
     secondCard.removeEventListener("click", flipCard);
+    checkForWin(); 
     resetBoard();
 }
 
@@ -132,9 +159,59 @@ function resetBoard() {
 }
 
 function Restart() {
+  hideWinPopup();
   resetBoard();
   shuffleCards();
   score = 0;
-  document.querySelector(".score").textContent = score;
+  timer = 0;
+  document.querySelector(".score").textContent = '--';
+  document.querySelector(".timer").textContent = '--';
   initBoard();
+  //play();
+  fTimer();
+}
+
+function fTimer(){
+  const intervalId = setInterval(() => {
+    if ((document.querySelectorAll(".card.matched")).length===cards.length){
+      clearInterval(intervalId);
+      return;
+    }
+    timer++;
+    document.querySelector(".timer").textContent = timer;
+  }, 1000);
+}
+
+function switchDivs() {
+    let s1 = document.querySelector(".wrapper");
+    let s2 = document.getElementById("game");
+
+    if (s1.style.display === "none") {
+        s1.style.display = "block";
+        s2.style.display = "none";
+    } else {
+        s1.style.display = "none";
+        s2.style.display = "block";
+    }
+}
+
+function checkForWin() {
+    const totalCards = document.querySelectorAll('.card').length;
+    const matchedCards = document.querySelectorAll('.card.matched').length;
+
+    if (matchedCards === totalCards) {
+        setHighScore(score);
+        showWinPopup();
+    }
+}
+
+function showWinPopup() {
+    document.querySelector(".score_f").textContent = score;
+    document.querySelector(".high-score_f").textContent = getHighScore();
+    document.getElementById("result").style.display = "block";
+    document.getElementById("result").style.display = "flex"; 
+}
+
+function hideWinPopup() {
+    document.getElementById("result").style.display = "none";
 }

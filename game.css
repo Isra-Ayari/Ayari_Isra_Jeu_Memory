@@ -1,24 +1,61 @@
-.container {
-  display: grid;
-  grid-template-columns: repeat(3,1fr);
-  grid-template-rows: repeat(2, 1fr);
-  column-gap: 50px;
-  row-gap: 150px;
+/* Make the whole page centered for landing page but normal for the game */
+body {
+  margin: 0;
+  font-family: sans-serif;
 }
 
-/* Reusable card styles */
+/* LANDING PAGE */
+.wrapper {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#landing_page {
+  display: grid;
+  place-items: center;
+  max-width: 480px;
+  width: 90%;
+  border: 3px solid green;
+  padding: 20px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+/* GAME LAYOUT */
+#game {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.sc {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* CARDS GRID */
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, 160px);
+  grid-template-rows: repeat(2, 220px);
+  gap: 30px;
+  justify-content: center;
+  margin-top: 0px;
+  margin-bottom: 10px;
+}
+
+/* CARD STYLING */
 .card {
-  width: 250px;
-  height: 150px;
-  perspective: 1000px;
-  transform-style: preserve-3d;
+  width: 160px;
+  height: 220px;
 }
 
 .card-inner {
-  position: relative;
   width: 100%;
   height: 100%;
-  transition: transform 0.8s;
+  position: relative;
+  transition: transform 0.6s;
   transform-style: preserve-3d;
 }
 
@@ -26,25 +63,45 @@
   transform: rotateY(180deg);
 }
 
-.front, .back {
+.front,
+.back {
   position: absolute;
   width: 100%;
   height: 100%;
-  backface-visibility: hidden;
   border-radius: 10px;
+  backface-visibility: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: sans-serif;
-  color: white;
-  font-size: 1.2em;
+}
+
+.front img {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  object-fit: cover;
 }
 
 .back {
   transform: rotateY(180deg);
-  z-index: 1;
-}
-.front {
-  z-index: 2;
 }
 
+/* POPUP */
+#result {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.popup-w {
+  background: white;
+  padding: 30px 40px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+}
