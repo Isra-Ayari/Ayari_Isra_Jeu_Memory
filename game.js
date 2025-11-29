@@ -9,7 +9,12 @@ let timerInterval=null;
 
 document.querySelector(".score").textContent = '--';
 document.querySelector(".timer").textContent = timer;
-document.querySelector(".high_score").textContent = getHighScore() ?? '--';
+if (getHighScore() === null) {
+    document.querySelector(".high_score").textContent = '--';
+} else{
+    document.querySelector(".high_score").textContent = getHighScore();
+}
+  
 
 
 document.addEventListener('DOMContentLoaded', () => {
