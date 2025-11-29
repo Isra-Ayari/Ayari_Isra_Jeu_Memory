@@ -233,7 +233,7 @@ function checkForWin() {
 
 function showWinPopup() {
     document.querySelector(".score_w").textContent = score;
-    document.querySelector(".high_score").textContent = getHighScore();
+    document.querySelector("#win .high_score").textContent = getHighScore();
     document.getElementById("win").style.display = "block";
     document.getElementById("win").style.display = "flex"; 
 }
