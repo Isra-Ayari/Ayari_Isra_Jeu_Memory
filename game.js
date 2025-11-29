@@ -3,11 +3,12 @@ let firstCard=null, secondCard=null;
 let lockBoard=false;
 let score=0;
 let cards=[];
-let timer=0;
+let timer=30;
+let timerInterval=null;
 
 
 document.querySelector(".score").textContent = '--';
-document.querySelector(".timer").textContent = '--';
+document.querySelector(".timer").textContent = timer;
 document.querySelector(".high-score").textContent = getHighScore();
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -160,25 +161,35 @@ function resetBoard() {
 
 function Restart() {
   hideWinPopup();
+  hideTimeUpPopup();
   resetBoard();
   shuffleCards();
   score = 0;
-  timer = 0;
+  timer = 30;
+  if (timerInterval) clearInterval(timerInterval);
   document.querySelector(".score").textContent = '--';
   document.querySelector(".timer").textContent = '--';
   initBoard();
-  //play();
   fTimer();
 }
 
 function fTimer(){
-  const intervalId = setInterval(() => {
-    if ((document.querySelectorAll(".card.matched")).length===cards.length){
-      clearInterval(intervalId);
-      return;
+  timerInterval = setInterval(() => {
+    const matchedCards = document.querySelectorAll(".card.matched").length;
+    const totalCards = cards.length;
+    
+    // Stop timer if all cards matched
+    if (matchedCards === totalCards){
+      clearInterval(timerInterval);
     }
-    timer++;
+    timer--;
     document.querySelector(".timer").textContent = timer;
+    // Check if time is up
+    if (timer <= 0) {
+      clearInterval(timerInterval);
+      lockBoard = true;
+      showTimeUpPopup();
+    }
   }, 1000);
 }
 
@@ -206,12 +217,24 @@ function checkForWin() {
 }
 
 function showWinPopup() {
-    document.querySelector(".score_f").textContent = score;
-    document.querySelector(".high-score_f").textContent = getHighScore();
-    document.getElementById("result").style.display = "block";
-    document.getElementById("result").style.display = "flex"; 
+    document.querySelector(".score_w").textContent = score;
+    document.querySelector(".high-score").textContent = getHighScore();
+    document.getElementById("win").style.display = "block";
+    document.getElementById("win").style.display = "flex"; 
 }
 
 function hideWinPopup() {
-    document.getElementById("result").style.display = "none";
+    document.getElementById("win").style.display = "none";
+}
+
+function showTimeUpPopup() {
+    const matchedCards = document.querySelectorAll('.card.matched').length;
+    document.querySelector(".score_f").textContent = score;
+    document.querySelector(".matches").textContent = matchedCards;
+    document.getElementById("timeup").style.display = "block";
+    document.getElementById("timeup").style.display = "flex";
+}
+
+function hideTimeUpPopup() {
+    document.getElementById("timeup").style.display = "none";
 }

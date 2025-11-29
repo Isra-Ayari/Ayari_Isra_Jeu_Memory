@@ -90,11 +90,19 @@
             </div>
             
         </div>
-        <div id="result" style="display: none;">
-            <div class="popup-w">
+        <div id="win" style="display: none;">
+            <div class="popup">
                 <p>Congrats! You won!<br>
+                   Your score: <span class="score_w"></span><br>
+                   High Score: <span class="high-score"></span></p>
+                <button onclick="Restart()">Retry</button>
+            </div>
+        </div>
+        <div id="timeup" style="display: none;">
+            <div class="popup">
+                <p>Time's Up!<br>
                    Your score: <span class="score_f"></span><br>
-                   High Score: <span class="high-score_f"></span></p>
+                   Matches found: <span class="matches"></span></p>
                 <button onclick="Restart()">Retry</button>
             </div>
         </div>

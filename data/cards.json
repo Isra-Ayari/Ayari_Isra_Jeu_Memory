@@ -1,14 +1,14 @@
 [
     {
-        "image": "../assets/circle.png",
+        "image": "../assets/fish.jpg",
         "name": "circle"
     },
     {
-        "image": "../assets/hexa.png",
+        "image": "../assets/flower.jpg",
         "name": "hexa"
     },
     {
-        "image": "../assets/triangle.png",
+        "image": "../assets/witch.jpg",
         "name": "triangle"
     }
 ]
