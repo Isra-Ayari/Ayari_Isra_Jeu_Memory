@@ -75,7 +75,7 @@ function initBoard() {
 
     const back = cardElem.querySelector('.back');
     const entry = cards[i] ?? {};
-    const src = (entry && (entry.image ?? entry)) ?? 'black.jpg';
+    const src = (entry && (entry.image ?? entry)) ?? 'back-card.png';
     const name = (entry && (entry.name ?? entry)) ?? src;
 
     // set data-name on the card element (not on back) so dataset is accessible on the card
@@ -218,7 +218,7 @@ function checkForWin() {
 
 function showWinPopup() {
     document.querySelector(".score_w").textContent = score;
-    document.querySelector(".high-score").textContent = getHighScore();
+    document.querySelector(".high_score").textContent = getHighScore();
     document.getElementById("win").style.display = "block";
     document.getElementById("win").style.display = "flex"; 
 }
