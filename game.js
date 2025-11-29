@@ -35,7 +35,8 @@ function setHighScore(score) {
 }
 
 function getHighScore() {
-  return Number(localStorage.getItem("highScore")) || '--';
+  const stored = localStorage.getItem("highScore");
+  return stored === null ? null : Number(stored);
 }
 
 function flipCard() {
