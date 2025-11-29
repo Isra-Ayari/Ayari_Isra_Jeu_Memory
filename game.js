@@ -38,6 +38,9 @@ function setHighScore(score) {
   if (score < currentHigh) {
     localStorage.setItem("highScore", score);
   }
+
+  const highScoreElem = document.querySelector(".high_score");
+    if (highScoreElem) highScoreElem.textContent = score;
 }
 
 function getHighScore() {
