@@ -1,37 +1,77 @@
-/* Make the whole page centered for landing page but normal for the game */
 body {
   margin: 0;
-  font-family: sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
 }
 
 /* LANDING PAGE */
 .wrapper {
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 20px;
 }
 
 #landing_page {
   display: grid;
   place-items: center;
   max-width: 480px;
-  width: 90%;
-  border: 3px solid green;
-  padding: 20px;
+  width: 100%;
+  background: white;
+  border-radius: 20px;
+  padding: 40px 20px;
   text-align: center;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
+}
+
+#landing_page h1 {
+  font-size: 2.5rem;
+  margin: 0 0 15px 0;
+  color: #667eea;
+}
+
+#landing_page p {
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+#landing_page button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 12px 40px;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+#landing_page button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+}
+
+#landing_page button:active {
+  transform: translateY(0);
 }
 
 /* GAME LAYOUT */
 #game {
   text-align: center;
-  margin-top: 10px;
+  padding: 0px;
 }
 
 .sc {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 600;
 }
 
 /* CARDS GRID */
@@ -41,14 +81,15 @@ body {
   grid-template-rows: repeat(2, 220px);
   gap: 30px;
   justify-content: center;
-  margin-top: 0px;
-  margin-bottom: 10px;
+  margin: auto;
+  padding: 5px;
 }
 
 /* CARD STYLING */
 .card {
   width: 160px;
   height: 220px;
+  cursor: pointer;
 }
 
 .card-inner {
@@ -73,6 +114,13 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 3rem;
+}
+
+.front {
+  /* background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); */
+  background-color: white;
+  border: 3px solid #380D9E;
 }
 
 .front img {
@@ -84,13 +132,22 @@ body {
 
 .back {
   transform: rotateY(180deg);
+  background: white;
+  border: 3px solid #380D9E;
+}
+
+.back img {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  object-fit: cover;
 }
 
 /* POPUP */
 #result {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(5px);
   display: flex;
   justify-content: center;
@@ -100,8 +157,80 @@ body {
 
 .popup-w {
   background: white;
-  padding: 30px 40px;
-  border-radius: 15px;
+  padding: 40px 50px;
+  border-radius: 20px;
   text-align: center;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+  animation: popupSlide 0.3s ease-out;
+}
+
+.popup-w p {
+  font-size: 1.2rem;
+  margin: 15px 0;
+  color: #333;
+}
+
+.popup-w button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 12px 40px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.popup-w button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+}
+
+/* Popup Animation */
+@keyframes popupSlide {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    grid-template-columns: repeat(2, 130px);
+    grid-template-rows: repeat(3, 180px);
+    gap: 20px;
+  }
+  
+  .card {
+    width: 130px;
+    height: 180px;
+  }
+  
+  #landing_page h1 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    grid-template-columns: repeat(2, 100px);
+    grid-template-rows: repeat(3, 140px);
+    gap: 15px;
+  }
+  
+  .card {
+    width: 100px;
+    height: 140px;
+  }
+  
+  .popup-w {
+    padding: 30px 20px;
+    margin: 20px;
+  }
 }
