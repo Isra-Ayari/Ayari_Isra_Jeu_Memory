@@ -74,9 +74,14 @@ function initBoard() {
     cardElem.classList.remove('flipped', 'matched');
 
     const back = cardElem.querySelector('.back');
-    const entry = cards[i] ?? {};
-    const src = (entry && (entry.image ?? entry)) ?? 'back-card.png';
-    const name = (entry && (entry.name ?? entry)) ?? src;
+    const entry = cards[i];
+    const src = entry && typeof entry.image === "string"
+      ? entry.image
+      : 'back-card.png';
+
+    const name = entry && typeof entry.name === "string"
+      ? entry.name
+      : src;
 
     // set data-name on the card element (not on back) so dataset is accessible on the card
     cardElem.setAttribute('data-name', name);
