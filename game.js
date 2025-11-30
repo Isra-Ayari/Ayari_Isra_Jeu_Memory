@@ -9,10 +9,11 @@ let timerInterval=null;
 
 document.querySelector(".score").textContent = '--';
 document.querySelector(".timer").textContent = timer;
-if (getHighScore() === null) {
-    document.querySelector(".high_score").textContent = '--';
+let highScore=getHighScore();
+if (highScore === null) {
+    document.querySelector("#game .high_score").textContent = '--';
 } else{
-    document.querySelector(".high_score").textContent = getHighScore();
+    document.querySelector("#game .high_score").textContent = highScore);
 }
   
 
